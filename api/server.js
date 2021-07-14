@@ -6,6 +6,10 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/cards', carsRouter);
+server.use('/api/cars', carsRouter);
+
+server.use('/', (req, res, next) => {
+    res.status(200).json({message: "I L-I-V-E!"})
+})
 
 module.exports = server;
