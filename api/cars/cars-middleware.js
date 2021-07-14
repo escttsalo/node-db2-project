@@ -1,4 +1,6 @@
 const Car = require('./cars-model')
+const vinValidator = require('vin-validator')
+const { reset } = require('nodemon')
 
 const checkCarId = async (req, res, next) => {
   try{
@@ -17,6 +19,24 @@ const checkCarId = async (req, res, next) => {
 
 const checkCarPayload = (req, res, next) => {
   const { vin, make, model, mileage } = req.body
+  const status = field => { res.status(400).json({message: `${field} is missing`}) }
+  switch(undefined){
+    case vin:
+      console.log('vin check', vin)
+      status('vin')
+      break;
+    case make:
+      status('make')
+      break;
+    case model:
+      status('model')
+      break;
+    case mileage:
+      status('mileage')
+      break;
+    default:
+      next()
+  }
 }
 
 const checkVinNumberValid = (req, res, next) => {
@@ -29,4 +49,5 @@ const checkVinNumberUnique = (req, res, next) => {
 
 module.exports = {
   checkCarId,
+  checkCarPayload,
 }
