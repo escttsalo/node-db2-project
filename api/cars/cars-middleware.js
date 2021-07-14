@@ -1,6 +1,5 @@
 const Car = require('./cars-model')
 const vinValidator = require('vin-validator')
-const { reset } = require('nodemon')
 
 const checkCarId = async (req, res, next) => {
   try{
