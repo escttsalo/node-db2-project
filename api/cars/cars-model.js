@@ -1,11 +1,24 @@
-const getAll = () => {
-  // DO YOUR MAGIC
+const db = require('../../data/db-config')
+
+const getAll = async () => {
+  try {
+    return await db('cards')
+  } catch (err) {
+    return []
+  }
 }
 
-const getById = () => {
-  // DO YOUR MAGIC
+const getById = async (id) => {
+  return await db('cars').where('id', id).first()
 }
 
-const create = () => {
-  // DO YOUR MAGIC
+const create = async car => {
+  const [id] = await db('cars').insert(car)
+  return await getById(id)
+}
+
+module.exports = {
+  getAll,
+  getById,
+  create
 }
